@@ -45,7 +45,7 @@
   .badge .dot.blue { background: var(--accent); }
 
   /* Download Cards */
-  .downloads { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 48px; }
+  .downloads { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 48px; }
   .card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -169,7 +169,13 @@
       <div class="os-icon">🍎</div>
       <h3>macOS</h3>
       <div class="arch">ARM64 (Apple Silicon)</div>
-      <a class="disabled" id="dl-mac" href="#">加载中...</a>
+      <a class="disabled" id="dl-mac-arm" href="#">加载中...</a>
+    </div>
+    <div class="card">
+      <div class="os-icon">🍎</div>
+      <h3>macOS</h3>
+      <div class="arch">x64 (Intel)</div>
+      <a class="disabled" id="dl-mac-x64" href="#">加载中...</a>
     </div>
     <div class="card">
       <div class="os-icon">🐧</div>
@@ -233,9 +239,10 @@ npm run dev      # 开发模式运行</code></pre>
     const assets = data.assets || [];
 
     const map = {
-      "dl-win":   a => a.name.includes("windows") && a.name.endsWith(".exe"),
-      "dl-mac":   a => a.name.includes("macos"),
-      "dl-linux": a => a.name.includes("linux"),
+      "dl-win":    a => a.name.includes("windows") && a.name.endsWith(".exe"),
+      "dl-mac-arm": a => a.name.includes("macos") && a.name.includes("arm64"),
+      "dl-mac-x64": a => a.name.includes("macos") && a.name.includes("x64"),
+      "dl-linux":  a => a.name.includes("linux"),
     };
 
     for (const [id, match] of Object.entries(map)) {
@@ -250,15 +257,12 @@ npm run dev      # 开发模式运行</code></pre>
       }
     }
   } catch (e) {
-    document.getElementById("dl-win").textContent = "前往 Releases";
-    document.getElementById("dl-win").href = "https://github.com/WD-CHINA/lan-image-server/releases";
-    document.getElementById("dl-win").classList.remove("disabled");
-    document.getElementById("dl-mac").textContent = "前往 Releases";
-    document.getElementById("dl-mac").href = "https://github.com/WD-CHINA/lan-image-server/releases";
-    document.getElementById("dl-mac").classList.remove("disabled");
-    document.getElementById("dl-linux").textContent = "前往 Releases";
-    document.getElementById("dl-linux").href = "https://github.com/WD-CHINA/lan-image-server/releases";
-    document.getElementById("dl-linux").classList.remove("disabled");
+    const fallbackIds = ["dl-win", "dl-mac-arm", "dl-mac-x64", "dl-linux"];
+    const releasesUrl = "https://github.com/WD-CHINA/lan-image-server/releases";
+    for (const id of fallbackIds) {
+      const el = document.getElementById(id);
+      if (el) { el.textContent = "前往 Releases"; el.href = releasesUrl; el.classList.remove("disabled"); }
+    }
   }
 })();
 </script>

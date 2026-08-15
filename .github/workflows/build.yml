@@ -20,8 +20,11 @@ jobs:
             platform: windows
             artifact: lan-image-server-windows-x64.exe
           - os: macos-latest
-            platform: macos
+            platform: macos-arm64
             artifact: lan-image-server-macos-arm64
+          - os: macos-13
+            platform: macos-x64
+            artifact: lan-image-server-macos-x64
           - os: ubuntu-latest
             platform: linux
             artifact: lan-image-server-linux-x64
