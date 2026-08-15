@@ -234,7 +234,7 @@ npm run dev      # 开发模式运行</code></pre>
 
     const map = {
       "dl-win":    a => a.name.includes("windows") && a.name.endsWith(".exe"),
-      "dl-mac-arm": a => a.name.includes("macos") && a.name.includes("arm64") && a.name.endsWith(".app"),
+      "dl-mac-arm": a => a.name.includes("macos") && a.name.includes("arm64"),
       "dl-linux":  a => a.name.includes("linux") && a.name.endsWith(".bin"),
     };
 
