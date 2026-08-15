@@ -1,7 +1,7 @@
 {
   "name": "lan-image-server",
   "version": "1.0.0",
-  "description": "局域网图片接收服务 - iPhone传图片到Windows",
+  "description": "局域网文件接收服务 - 设备间互传任意文件 (Windows/macOS/Linux)",
   "main": "image_server.js",
   "bin": "image_server.js",
   "pkg": {
