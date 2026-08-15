@@ -17,7 +17,7 @@ console.log(`📦 输出文件: dist/${BIN_NAME}\n`);
 
 // ── 1. 内联合并 ──────────────────────────────────
 let libCode = fs.readFileSync(
-  path.join(__dirname, "node_modules", "qrcode-generator", "dist", "qrcode.js"),
+  require.resolve("qrcode-generator"),
   "utf-8"
 );
 libCode = libCode.replace(
