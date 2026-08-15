@@ -28,10 +28,26 @@
 
 ### 使用
 
-1. 双击运行可执行文件
-2. 终端会显示局域网地址和二维码
-3. 其他设备连接同一 WiFi，浏览器打开该地址（或扫描二维码）
-4. 选择文件，点击上传 — 完成！
+**Windows**：双击 `.exe` 文件即可运行。
+
+**macOS / Linux**：打开终端，执行：
+
+```bash
+# 添加执行权限（仅首次需要）
+chmod +x lan-image-server-*
+
+# 运行
+./lan-image-server-macos-arm64   # macOS Apple Silicon
+./lan-image-server-linux-x64.bin # Linux
+```
+
+> macOS 首次运行可能提示“无法验证开发者”，前往 **系统设置 → 隐私与安全性** 点击“仍要打开”。
+
+### 通用流程
+
+1. 运行后终端会显示局域网地址和二维码
+2. 其他设备连接同一 WiFi，浏览器打开该地址（或扫描二维码）
+3. 选择文件，点击上传 — 完成！
 
 ```bash
 # 默认端口 8080，文件保存到 ~/Desktop/LAN-Uploads/
