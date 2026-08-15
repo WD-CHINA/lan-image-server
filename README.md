@@ -24,7 +24,6 @@
 |------|------|
 | Windows x64 | `lan-image-server-windows-x64.exe` |
 | macOS ARM64 (Apple Silicon) | `lan-image-server-macos-arm64` |
-| macOS x64 (Intel) | `lan-image-server-macos-x64` |
 | Linux x64 | `lan-image-server-linux-x64` |
 
 ### 使用
