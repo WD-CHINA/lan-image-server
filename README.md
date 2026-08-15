@@ -23,8 +23,8 @@
 | 平台 | 文件 |
 |------|------|
 | Windows x64 | `lan-image-server-windows-x64.exe` |
-| macOS ARM64 (Apple Silicon) | `lan-image-server-macos-arm64` |
-| Linux x64 | `lan-image-server-linux-x64` |
+| macOS ARM64 (Apple Silicon) | `lan-image-server-macos-arm64.app` |
+| Linux x64 | `lan-image-server-linux-x64.bin` |
 
 ### 使用
 

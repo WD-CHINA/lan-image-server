@@ -21,10 +21,10 @@ jobs:
             artifact: lan-image-server-windows-x64.exe
           - os: macos-latest
             platform: macos-arm64
-            artifact: lan-image-server-macos-arm64
+            artifact: lan-image-server-macos-arm64.app
           - os: ubuntu-latest
             platform: linux
-            artifact: lan-image-server-linux-x64
+            artifact: lan-image-server-linux-x64.bin
 
     runs-on: ${{ matrix.os }}
     name: Build (${{ matrix.platform }})
