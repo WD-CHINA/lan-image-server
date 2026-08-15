@@ -1,0 +1,7 @@
+node_modules/
+dist/
+uploads/
+sea-prep.blob
+sea-config.json
+_bundled_server.js
+*.exe

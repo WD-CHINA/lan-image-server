@@ -1,0 +1,24 @@
+{
+  "name": "lan-image-server",
+  "version": "1.0.0",
+  "description": "局域网图片接收服务 - iPhone传图片到Windows",
+  "main": "image_server.js",
+  "bin": "image_server.js",
+  "pkg": {
+    "targets": [
+      "node22-win-x64"
+    ],
+    "outputPath": "dist"
+  },
+  "scripts": {
+    "build": "node build.js",
+    "dev": "node image_server.js"
+  },
+  "dependencies": {
+    "qrcode-generator": "^1.4.5"
+  },
+  "devDependencies": {
+    "@yao-pkg/pkg": "^6.22.0",
+    "postject": "^1.0.0-alpha.6"
+  }
+}
