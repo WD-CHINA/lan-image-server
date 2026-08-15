@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LAN Image Server - 局域网文件传输工具</title>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #151515;
+    --border: #2a2a2a;
+    --text: #e8e8e8;
+    --text2: #888;
+    --accent: #0a84ff;
+    --accent-hover: #409cff;
+    --green: #30d158;
+    --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "SF Pro Display", "Segoe UI", "Helvetica Neue", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .container { max-width: 800px; margin: 0 auto; padding: 60px 24px; }
+
+  /* Hero */
+  .hero { text-align: center; margin-bottom: 60px; }
+  .hero .icon { font-size: 64px; margin-bottom: 16px; }
+  .hero h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 8px; }
+  .hero h1 span { background: linear-gradient(135deg, var(--accent), #bf5af2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero p { color: var(--text2); font-size: 1.1rem; max-width: 500px; margin: 0 auto; }
+
+  /* Badges */
+  .badges { display: flex; justify-content: center; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border-radius: 20px;
+    background: var(--surface); border: 1px solid var(--border);
+    font-size: .8rem; color: var(--text2);
+  }
+  .badge .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .badge .dot.green { background: var(--green); }
+  .badge .dot.blue { background: var(--accent); }
+
+  /* Download Cards */
+  .downloads { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 48px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    text-align: center;
+    transition: border-color .2s, transform .2s;
+  }
+  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .card .os-icon { font-size: 36px; margin-bottom: 10px; }
+  .card h3 { font-size: 1rem; margin-bottom: 4px; }
+  .card .arch { font-size: .8rem; color: var(--text2); margin-bottom: 16px; }
+  .card a {
+    display: inline-block;
+    padding: 10px 28px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: .9rem;
+    font-weight: 600;
+    transition: background .15s;
+  }
+  .card a:hover { background: var(--accent-hover); }
+  .card a.disabled {
+    background: #333; color: #666; pointer-events: none;
+  }
+
+  /* Steps */
+  .section { margin-bottom: 48px; }
+  .section h2 { font-size: 1.4rem; margin-bottom: 16px; }
+  .steps { list-style: none; counter-reset: step; }
+  .steps li {
+    counter-increment: step;
+    padding: 14px 16px 14px 56px;
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 8px;
+    font-size: .95rem;
+  }
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 16px; top: 14px;
+    width: 28px; height: 28px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    font-size: .85rem;
+    font-weight: 700;
+  }
+
+  /* Code */
+  code {
+    background: #1c1c1e;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: "SF Mono", "Fira Code", monospace;
+    font-size: .85rem;
+    color: #ff9f0a;
+  }
+  pre {
+    background: #1c1c1e;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    margin-top: 12px;
+  }
+  pre code { background: none; padding: 0; color: var(--text); }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    color: var(--text2);
+    font-size: .85rem;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .container { padding: 40px 16px; }
+    .hero h1 { font-size: 1.8rem; }
+    .downloads { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="icon">📂</div>
+    <h1><span>LAN File Server</span></h1>
+    <p>零依赖、跨平台的局域网文件传输工具。设备间互传任意文件，无需安装客户端。</p>
+    <div class="badges">
+      <span class="badge"><span class="dot green"></span>Windows</span>
+      <span class="badge"><span class="dot green"></span>macOS</span>
+      <span class="badge"><span class="dot green"></span>Linux</span>
+      <span class="badge"><span class="dot blue"></span>零依赖</span>
+      <span class="badge"><span class="dot blue"></span>单文件</span>
+    </div>
+  </div>
+
+  <!-- Downloads -->
+  <div class="downloads" id="downloads">
+    <div class="card">
+      <div class="os-icon">🪟</div>
+      <h3>Windows</h3>
+      <div class="arch">x64 · .exe</div>
+      <a class="disabled" id="dl-win" href="#">加载中...</a>
+    </div>
+    <div class="card">
+      <div class="os-icon">🍎</div>
+      <h3>macOS</h3>
+      <div class="arch">ARM64 (Apple Silicon)</div>
+      <a class="disabled" id="dl-mac" href="#">加载中...</a>
+    </div>
+    <div class="card">
+      <div class="os-icon">🐧</div>
+      <h3>Linux</h3>
+      <div class="arch">x64</div>
+      <a class="disabled" id="dl-linux" href="#">加载中...</a>
+    </div>
+  </div>
+
+  <!-- Usage -->
+  <div class="section">
+    <h2>使用方法</h2>
+    <ol class="steps">
+      <li>下载对应平台的可执行文件</li>
+      <li>双击运行，终端会显示局域网地址和二维码</li>
+      <li>其他设备连接同一 WiFi，浏览器打开该地址</li>
+      <li>选择文件，点击上传 — 完成！</li>
+    </ol>
+  </div>
+
+  <!-- CLI -->
+  <div class="section">
+    <h2>命令行参数</h2>
+    <pre><code># 默认端口 8080，保存到 ~/Desktop/LAN-Uploads/
+./lan-image-server
+
+# 自定义端口和保存目录
+./lan-image-server --port 9090 --dir "/path/to/folder"</code></pre>
+  </div>
+
+  <!-- Build from source -->
+  <div class="section">
+    <h2>从源码构建</h2>
+    <pre><code>git clone https://github.com/WD-CHINA/lan-image-server.git
+cd lan-image-server
+npm install
+npm run build    # 构建当前平台的可执行文件
+npm run dev      # 开发模式运行</code></pre>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      <a href="https://github.com/WD-CHINA/lan-image-server">GitHub</a> ·
+      <a href="https://github.com/WD-CHINA/lan-image-server/releases">Releases</a> ·
+      <a href="https://github.com/WD-CHINA/lan-image-server/issues">Issues</a>
+    </p>
+    <p style="margin-top: 8px;">MIT License · Made with Node.js SEA</p>
+  </footer>
+
+</div>
+
+<script>
+// 从 GitHub API 获取最新 Release 下载链接
+(async () => {
+  const API = "https://api.github.com/repos/WD-CHINA/lan-image-server/releases/latest";
+  try {
+    const res = await fetch(API);
+    if (!res.ok) throw new Error("No releases");
+    const data = await res.json();
+    const assets = data.assets || [];
+
+    const map = {
+      "dl-win":   a => a.name.includes("windows") && a.name.endsWith(".exe"),
+      "dl-mac":   a => a.name.includes("macos"),
+      "dl-linux": a => a.name.includes("linux"),
+    };
+
+    for (const [id, match] of Object.entries(map)) {
+      const el = document.getElementById(id);
+      const asset = assets.find(match);
+      if (asset) {
+        el.href = asset.browser_download_url;
+        el.textContent = "下载 " + (asset.size / 1048576).toFixed(1) + " MB";
+        el.classList.remove("disabled");
+      } else {
+        el.textContent = "暂无";
+      }
+    }
+  } catch (e) {
+    document.getElementById("dl-win").textContent = "前往 Releases";
+    document.getElementById("dl-win").href = "https://github.com/WD-CHINA/lan-image-server/releases";
+    document.getElementById("dl-win").classList.remove("disabled");
+    document.getElementById("dl-mac").textContent = "前往 Releases";
+    document.getElementById("dl-mac").href = "https://github.com/WD-CHINA/lan-image-server/releases";
+    document.getElementById("dl-mac").classList.remove("disabled");
+    document.getElementById("dl-linux").textContent = "前往 Releases";
+    document.getElementById("dl-linux").href = "https://github.com/WD-CHINA/lan-image-server/releases";
+    document.getElementById("dl-linux").classList.remove("disabled");
+  }
+})();
+</script>
+</body>
+</html>
